@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.deviget.reddit.R;
 import com.deviget.reddit.entities.Child;
 import com.deviget.reddit.entities.Data_;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 import java.util.List;
@@ -80,6 +81,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             comments.setText(context.getResources().getString(R.string.comments, item.getNumComments()));
             if (item.getThumbnail().isEmpty()){
                 thumbnail.setVisibility(View.GONE);
+            } else {
+                Picasso.get().load(item.getThumbnail()).into(thumbnail);
             }
             itemView.setOnClickListener(v -> {
                 status.setVisibility(View.INVISIBLE);
