@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.deviget.reddit.adapter.PostAdapter;
 import com.deviget.reddit.api.APIService;
@@ -46,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btnsaveImage)
     Button btnsaveImage;
 
+    @BindView(R.id.swipeRefreshLayout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         service = ApiUtils.getAPIService();
 
         getTop50Reddit();
+
+        swipeRefreshLayout.setOnRefreshListener(this::getTop50Reddit);
 
     }
 
@@ -73,7 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     list.setAdapter(new PostAdapter(getApplicationContext(), childList, item -> {
                         updateUI(item);
                     }));
-
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        //hide swipe circle
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
                 }
             }
 
