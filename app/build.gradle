@@ -54,4 +54,7 @@ dependencies {
     //butterknife
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
