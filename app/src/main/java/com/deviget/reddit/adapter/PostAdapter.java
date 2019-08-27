@@ -85,6 +85,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 status.setVisibility(View.INVISIBLE);
                 listener.onItemClick(item);
             });
+            button.setOnClickListener(v -> {
+                posts.remove(getAdapterPosition());
+                notifyItemRemoved(getAdapterPosition());
+                notifyItemRangeChanged(getAdapterPosition(), posts.size());
+            });
         }
     }
 
